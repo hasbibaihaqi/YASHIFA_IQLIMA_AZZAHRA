@@ -358,27 +358,19 @@ function startMusic() {
   musicStarted = true;
   mute.hidden = false;
 
-  // Pastikan audio sudah siap, lalu play
-  const tryPlay = () => {
-    bgm.play()
-      .then(() => fade(.55, 3500))
-      .catch(err => {
-        // Jika format tidak didukung, coba format lain
-        console.warn('Audio play failed:', err.message);
-        noMusic = true;
-        mute.hidden = true;
-      });
-  };
-
-  if (bgm.readyState >= 2) {
-    tryPlay();
-  } else {
-    bgm.addEventListener('canplay', tryPlay, { once: true });
-    // Timeout fallback
-    setTimeout(() => {
-      if (!bgm.paused === false) tryPlay();
-    }, 3000);
-  }
+  // Di mobile (HP), fungsi play() HARUS dipanggil secara sinkron langsung dari event click.
+  // Menunggu event 'canplay' akan membuat browser memblokir audio karena dianggap bukan dari interaksi user.
+  bgm.play()
+    .then(() => {
+      fade(.55, 3500);
+    })
+    .catch(err => {
+      console.warn('Audio play failed:', err.message);
+      // Coba unmute (kadang browser butuh di-unmute paksa jika autoplay policy ketat)
+      bgm.muted = false;
+      noMusic = true;
+      mute.hidden = true;
+    });
 }
 
 mute.onclick = () => {
