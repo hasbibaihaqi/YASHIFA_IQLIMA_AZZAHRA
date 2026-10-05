@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#05070d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="Sebuah hadiah digital yang dibuat dengan waktu, usaha, pikiran, dan perasaan.">
+  <title>A Gift Made With What I Have</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loader" aria-live="polite" aria-label="Memuat">
+    <div class="loader-line"></div>
+    <p id="loader-text">Preparing something for you...</p>
+  </div>
+
+  <main id="app" data-photo="none">
+    <!-- Ambient glow di belakang foto -->
+    <div id="glow" aria-hidden="true"></div>
+    <!-- Background foto layar penuh (scene akhir) -->
+    <div id="bgp" aria-hidden="true"></div>
+    <!-- Overlay gelap -->
+    <div id="dim" aria-hidden="true"></div>
+    <!-- Bingkai foto utama -->
+    <figure id="frame" aria-label="Foto kelulusan">
+      <img id="photo" alt="Foto kelulusan">
+    </figure>
+    <!-- Canvas: partikel ambien + confetti -->
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <!-- Semua scene dibuat oleh script.js -->
+    <div id="scenes" aria-live="polite" role="region" aria-label="Konten"></div>
+    <!-- Tombol mute musik (fixed pojok kanan atas) -->
+    <button id="mute" hidden aria-label="Nyalakan atau matikan musik" title="Musik">🔊</button>
+    <!-- Progress indicator -->
+    <nav id="progress" aria-label="Progress" aria-hidden="true" hidden></nav>
+  </main>
+
+  <!--
+    Audio: mendukung MP4 (audio/video container) dan MP3.
+    Script.js akan mengganti src secara dinamis via CONFIG.musicPath
+  -->
+  <audio id="bgm" loop preload="auto">
+    <source src="assets/music.mp4" type="video/mp4">
+    <source src="assets/music.mp4" type="audio/mp4">
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <noscript>
+    <style>
+      body { display:flex; align-items:center; justify-content:center; height:100vh;
+             background:#05070d; color:#f1ece2; font-family:sans-serif; text-align:center; padding:2rem; }
+    </style>
+    <p>Aktifkan JavaScript untuk membuka hadiah ini.</p>
+  </noscript>
+
+  <script src="script.js"></script>
+</body>
+</html>
